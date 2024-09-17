@@ -1,3 +1,4 @@
+[![Docker](https://img.shields.io/docker/pulls/justinlee901227/sam2)](https://hub.docker.com/r/justinlee901227/sam2)
 # Segment anything 2 docker
 
 Segment anything 2 is publish by Meta research.
