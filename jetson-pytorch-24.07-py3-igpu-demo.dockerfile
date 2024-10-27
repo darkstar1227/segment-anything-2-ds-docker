@@ -8,10 +8,10 @@ RUN apt-get update && apt-get install -y git \
     libglib2.0-0
 
 # Set the working directory
-WORKDIR /segment-anything-2
+WORKDIR /sam2
 
 # Clone the repository
-RUN git clone https://github.com/facebookresearch/segment-anything-2.git .
+RUN git clone https://github.com/facebookresearch/sam2.git .
 
 # Install dependencies
 RUN pip install --no-cache-dir numpy>=1.24.4 tqdm>=4.66.1 hydra-core>=1.3.2 iopath>=0.1.10 pillow>=9.4.0
