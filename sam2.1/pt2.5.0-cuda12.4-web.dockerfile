@@ -23,7 +23,7 @@ RUN git clone https://github.com/facebookresearch/sam2.git .
 # # Install dependencies
 RUN pip uninstall -y SAM-2 && \
     rm -f ./sam2/*.so && \
-    SAM2_BUILD_ALLOW_ERRORS=0 pip install -v -e ".[demo]"
+    SAM2_BUILD_ALLOW_ERRORS=0 pip install -v -e ".[interactive-demo]"
 RUN pip install --no-cache-dir ninja pycocotools
 RUN python /sam2/setup.py build_ext --inplace
 
@@ -33,6 +33,6 @@ RUN dos2unix ./checkpoints/download_ckpts.sh
 RUN chmod +x ./checkpoints/download_ckpts.sh && \
     cd checkpoints && \
     ./download_ckpts.sh || echo "Checkpoint download failed, continuing anyway"
-
+#TODO:Change to web demo
 # Run jupyter notebook
 CMD ["jupyter", "notebook", "--ip=0.0.0.0", "--allow-root", "--no-browser"]

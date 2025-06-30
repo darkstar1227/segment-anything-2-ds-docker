@@ -1,4 +1,4 @@
-FROM pytorch/pytorch:2.4.0-cuda12.4-cudnn9-devel
+FROM pytorch/pytorch:2.3.1-cuda12.1-cudnn8-devel
 
 # Install git and dos2unix
 RUN apt-get update && apt-get install -y git \
@@ -23,7 +23,7 @@ RUN git clone https://github.com/facebookresearch/sam2.git .
 # # Install dependencies
 RUN pip uninstall -y SAM-2 && \
     rm -f ./sam2/*.so && \
-    SAM2_BUILD_ALLOW_ERRORS=0 pip install -v -e ".[demo]"
+    SAM2_BUILD_ALLOW_ERRORS=0 pip install -v -e ".[notebooks]"
 RUN pip install --no-cache-dir ninja pycocotools
 RUN python /sam2/setup.py build_ext --inplace
 

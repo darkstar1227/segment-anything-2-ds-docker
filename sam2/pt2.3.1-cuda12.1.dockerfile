@@ -1,4 +1,4 @@
-FROM pytorch/pytorch:2.5.0-cuda12.4-cudnn9-devel
+FROM pytorch/pytorch:2.3.1-cuda12.1-cudnn8-devel
 
 # Install git and dos2unix
 RUN apt-get update && apt-get install -y git \
@@ -11,10 +11,10 @@ RUN apt-get update && apt-get install -y git \
 ENV TORCH_CUDA_ARCH_LIST="6.0 6.1 7.0 7.5 8.0 8.6+PTX"
 
 # Set the working directory
-WORKDIR /sam2
+WORKDIR /segment-anything-2
 
 # Clone the repository
-RUN git clone https://github.com/facebookresearch/sam2.git .
+RUN git clone https://github.com/facebookresearch/segment-anything-2.git .
 
 # # Remove existing setup.py and copy custom one
 # RUN rm setup.py
@@ -22,11 +22,13 @@ RUN git clone https://github.com/facebookresearch/sam2.git .
 
 # # Install dependencies
 
+
 RUN pip uninstall -y SAM-2 && \
     rm -f ./sam2/*.so && \
     SAM2_BUILD_ALLOW_ERRORS=0 pip install -v -e ".[demo]"
 RUN pip install --no-cache-dir ninja pycocotools
-RUN python /sam2/setup.py build_ext --inplace
+
+RUN python /segment-anything-2/setup.py build_ext --inplace
 
 # Download checkpoints
 RUN dos2unix ./checkpoints/download_ckpts.sh
